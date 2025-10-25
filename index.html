@@ -139,6 +139,11 @@
             margin-bottom: 20px;
             border-radius: 8px;
             border-left: 4px solid #2a5298;
+            transition: transform 0.2s;
+        }
+        
+        .publication-item:hover {
+            transform: translateX(5px);
         }
         
         .publication-item h3 {
@@ -146,6 +151,17 @@
             margin-bottom: 10px;
             font-size: 1.1em;
             line-height: 1.4;
+        }
+        
+        .publication-item h3 a {
+            color: #1e3c72;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .publication-item h3 a:hover {
+            color: #2a5298;
+            text-decoration: underline;
         }
         
         .publication-item p {
@@ -162,6 +178,23 @@
             border-radius: 3px;
             font-size: 0.85em;
             margin-top: 10px;
+        }
+        
+        .read-paper-btn {
+            display: inline-block;
+            margin-top: 10px;
+            margin-left: 10px;
+            padding: 8px 16px;
+            background-color: #2a5298;
+            color: white;
+            text-decoration: none;
+            border-radius: 4px;
+            font-size: 0.9em;
+            transition: background-color 0.3s;
+        }
+        
+        .read-paper-btn:hover {
+            background-color: #1e3c72;
         }
         
         .presentation-item {
@@ -225,11 +258,15 @@
         }
         
         .contact-links {
-            display: flex;
-            justify-content: center;
-            gap: 30px;
-            flex-wrap: wrap;
-            margin-top: 20px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            max-width: 800px;
+            margin: 20px auto;
+        }
+        
+        .contact-item {
+            text-align: center;
         }
         
         .contact-info a {
@@ -265,6 +302,10 @@
             
             .scholar-link {
                 margin-top: 15px;
+            }
+            
+            .contact-links {
+                grid-template-columns: 1fr;
             }
         }
     </style>
@@ -320,17 +361,19 @@
             </div>
             <div class="publications-list">
                 <div class="publication-item">
-                    <h3>Greener TEAMs: Tethered Electrolyte Active-Layer Membranes Produced by Surface-Initiated Free Radical Polymerization</h3>
+                    <h3><a href="https://www.sciencedirect.com/science/article/pii/S037673882500362X" target="_blank">Greener TEAMs: Tethered Electrolyte Active-Layer Membranes Produced by Surface-Initiated Free Radical Polymerization</a></h3>
                     <p><strong>Authors:</strong> Jabiyev, E., Pour, M. H. M., & Porter, C. J.</p>
                     <p><strong>Journal:</strong> Journal of Membrane Science, 124049</p>
                     <span class="publication-year">2025</span>
+                    <a href="https://www.sciencedirect.com/science/article/pii/S037673882500362X" target="_blank" class="read-paper-btn">Read Paper →</a>
                 </div>
                 
                 <div class="publication-item">
-                    <h3>The water-environment nexus</h3>
+                    <h3><a href="https://www.sciencedirect.com/science/article/abs/pii/B9780443134395000089" target="_blank">The water-environment nexus</a></h3>
                     <p><strong>Authors:</strong> Porter, C. J., Beckingham, L. E., Jabiyev, E., Shi, Z., & Pour, M. H. M.</p>
                     <p><strong>Book Chapter in:</strong> The Renewable Energy-Water-Environment Nexus (pp. 205-255). Elsevier. ISBN 9780443134395</p>
                     <span class="publication-year">2024</span>
+                    <a href="https://www.sciencedirect.com/science/article/abs/pii/B9780443134395000089" target="_blank" class="read-paper-btn">Read Chapter →</a>
                 </div>
             </div>
             <p style="margin-top: 20px; text-align: center; color: #666;">
@@ -382,25 +425,33 @@
         <section id="contact">
             <h2>Contact & Resume</h2>
             <div class="resume-download">
-                <a href="Elnur Jabiyev Resume.pdf" class="btn" download>Download Resume (PDF)</a>
+                <a href="Elnur_Jabiyev_Resume.pdf" class="btn" download>Download Resume (PDF)</a>
             </div>
             <div class="contact-info">
                 <div class="contact-links">
-                    <div>
-                        <strong>Email:</strong><br>
+                    <div class="contact-item">
+                        <strong>Email</strong><br>
                         <a href="mailto:ezj0033@auburn.edu">ezj0033@auburn.edu</a>
                     </div>
-                    <div>
-                        <strong>Phone:</strong><br>
+                    <div class="contact-item">
+                        <strong>Phone</strong><br>
                         <a href="tel:+13347808213">+1 (334) 780-8213</a>
                     </div>
-                    <div>
-                        <strong>LinkedIn:</strong><br>
+                    <div class="contact-item">
+                        <strong>LinkedIn</strong><br>
                         <a href="https://www.linkedin.com/in/elnur-jabiyev-u1999/" target="_blank">View Profile</a>
                     </div>
-                    <div>
-                        <strong>Google Scholar:</strong><br>
+                    <div class="contact-item">
+                        <strong>Google Scholar</strong><br>
                         <a href="https://scholar.google.com/citations?user=qDRpqsYAAAAJ&hl=en" target="_blank">View Publications</a>
+                    </div>
+                    <div class="contact-item">
+                        <strong>ResearchGate</strong><br>
+                        <a href="https://www.researchgate.net/profile/Elnur-Jabiyev?ev=hdr_xprf" target="_blank">View Profile</a>
+                    </div>
+                    <div class="contact-item">
+                        <strong>Facebook</strong><br>
+                        <a href="https://www.facebook.com/elnur.cebiyev.777" target="_blank">View Profile</a>
                     </div>
                 </div>
             </div>
