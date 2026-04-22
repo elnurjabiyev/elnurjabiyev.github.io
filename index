@@ -1,0 +1,631 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Elnur Jabiyev — Membrane & Polymer Science</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --navy:#0f2044;--navy-mid:#1a3560;--blue:#2756a8;--blue-light:#3b6fd4;
+            --gold:#c09a3e;--gold-light:#e8c46a;--cream:#faf8f4;--warm-gray:#f2ede6;
+            --text:#1c1c1c;--text-muted:#6b6b6b;--border:#ddd8cf;--white:#ffffff;
+        }
+        *{margin:0;padding:0;box-sizing:border-box;}
+        html{scroll-behavior:smooth;}
+        body{font-family:'DM Sans',sans-serif;background:var(--cream);color:var(--text);line-height:1.7;}
+
+        /* NAV */
+        nav{position:fixed;top:0;left:0;right:0;z-index:1000;background:rgba(15,32,68,.97);backdrop-filter:blur(8px);border-bottom:1px solid rgba(192,154,62,.25);}
+        .nav-inner{max-width:1100px;margin:0 auto;padding:0 40px;display:flex;align-items:center;justify-content:space-between;height:56px;}
+        .nav-brand{font-family:'EB Garamond',serif;font-size:1.12em;color:var(--gold-light);text-decoration:none;letter-spacing:.02em;}
+        .nav-links{display:flex;gap:4px;}
+        .nav-links a{color:rgba(255,255,255,.7);text-decoration:none;font-size:.8em;font-weight:500;letter-spacing:.06em;text-transform:uppercase;padding:5px 11px;border-radius:3px;transition:color .2s,background .2s;}
+        .nav-links a:hover{color:var(--gold-light);background:rgba(192,154,62,.1);}
+
+        /* HERO */
+        .hero{background:linear-gradient(155deg,var(--navy) 0%,var(--navy-mid) 50%,#1e4a8a 100%);padding:120px 40px 80px;position:relative;overflow:hidden;}
+        .hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 700px 500px at 85% 50%,rgba(55,100,180,.15) 0%,transparent 70%),radial-gradient(ellipse 400px 300px at 10% 85%,rgba(192,154,62,.07) 0%,transparent 70%);}
+        .hero-inner{max-width:1100px;margin:0 auto;display:grid;grid-template-columns:1fr 200px;gap:60px;align-items:center;position:relative;}
+        .eyebrow{display:inline-flex;align-items:center;gap:10px;font-size:.75em;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--gold-light);margin-bottom:16px;}
+        .eyebrow::before{content:'';display:block;width:28px;height:1.5px;background:var(--gold);}
+        .hero h1{font-family:'EB Garamond',serif;font-size:clamp(2.4em,4vw,3.5em);font-weight:500;color:var(--white);line-height:1.15;margin-bottom:10px;}
+        .hero-sub{font-size:.97em;color:rgba(255,255,255,.6);margin-bottom:22px;letter-spacing:.01em;}
+        .hero-bio{max-width:560px;color:rgba(255,255,255,.78);font-size:.96em;line-height:1.78;margin-bottom:30px;}
+        .hero-stats{display:flex;gap:32px;margin-bottom:32px;}
+        .stat{text-align:center;}
+        .stat-num{font-family:'EB Garamond',serif;font-size:1.9em;font-weight:600;color:var(--gold-light);line-height:1;display:block;}
+        .stat-lbl{font-size:.68em;letter-spacing:.09em;text-transform:uppercase;color:rgba(255,255,255,.45);margin-top:3px;}
+        .stat-div{width:1px;background:rgba(255,255,255,.15);align-self:stretch;}
+        .hero-btns{display:flex;gap:12px;flex-wrap:wrap;}
+        .btn-gold{background:var(--gold);color:var(--navy);padding:10px 26px;border-radius:4px;text-decoration:none;font-weight:600;font-size:.87em;letter-spacing:.04em;display:inline-flex;align-items:center;gap:7px;transition:background .2s,transform .15s;}
+        .btn-gold:hover{background:var(--gold-light);transform:translateY(-1px);}
+        .btn-ghost{border:1.5px solid rgba(255,255,255,.28);color:rgba(255,255,255,.8);padding:10px 26px;border-radius:4px;text-decoration:none;font-weight:500;font-size:.87em;letter-spacing:.04em;transition:border-color .2s,color .2s;}
+        .btn-ghost:hover{border-color:var(--gold);color:var(--gold-light);}
+        .hero-photo-col{display:flex;flex-direction:column;align-items:center;gap:12px;}
+        .photo-circle{width:180px;height:180px;border-radius:50%;border:3px solid rgba(192,154,62,.4);background:linear-gradient(135deg,var(--navy-mid),#2756a8);display:flex;align-items:center;justify-content:center;font-family:'EB Garamond',serif;font-size:3.5em;color:var(--gold-light);box-shadow:0 8px 40px rgba(0,0,0,.4);overflow:hidden;}
+        .photo-circle img{width:100%;height:100%;object-fit:cover;}
+        .photo-affil{font-size:.72em;color:rgba(255,255,255,.5);text-align:center;line-height:1.4;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:4px;padding:7px 12px;}
+        .affil-dot{display:inline-block;width:6px;height:6px;border-radius:50%;background:var(--gold);margin-right:5px;vertical-align:middle;}
+
+        /* MAIN */
+        .page-body{max-width:1100px;margin:0 auto;padding:64px 40px;display:grid;grid-template-columns:1fr 290px;gap:60px;align-items:start;}
+        .section{margin-bottom:64px;}
+        .section-tag{display:flex;align-items:center;gap:12px;font-size:.7em;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--blue);margin-bottom:18px;}
+        .section-tag::after{content:'';flex:1;height:1px;background:var(--border);}
+        .section-heading{font-family:'EB Garamond',serif;font-size:1.85em;font-weight:500;color:var(--navy);margin-bottom:26px;line-height:1.2;}
+
+        /* PUBLISHED PAPERS */
+        .pub-card{background:var(--white);border:1px solid var(--border);border-radius:8px;padding:24px 26px;margin-bottom:14px;position:relative;transition:border-color .2s,box-shadow .2s,transform .2s;}
+        .pub-card::before{content:'';position:absolute;left:0;top:0;bottom:0;width:4px;background:linear-gradient(180deg,var(--blue),var(--navy));border-radius:8px 0 0 8px;}
+        .pub-card:hover{border-color:var(--blue-light);box-shadow:0 4px 18px rgba(39,86,168,.1);transform:translateY(-2px);}
+        .pub-year{display:inline-block;background:var(--warm-gray);color:var(--blue);font-size:.7em;font-weight:700;letter-spacing:.06em;padding:2px 8px;border-radius:3px;margin-bottom:9px;}
+        .pub-title{font-family:'EB Garamond',serif;font-size:1.12em;color:var(--navy);line-height:1.45;margin-bottom:7px;}
+        .pub-title a{color:inherit;text-decoration:none;transition:color .2s;}
+        .pub-title a:hover{color:var(--blue);}
+        .pub-meta{font-size:.83em;color:var(--text-muted);margin-bottom:3px;}
+        .pub-meta strong{color:var(--text);}
+        .pub-journal{font-size:.82em;color:var(--text-muted);font-style:italic;margin-bottom:12px;}
+        .pub-link{display:inline-flex;align-items:center;gap:5px;font-size:.8em;font-weight:600;color:var(--blue);text-decoration:none;transition:color .2s;}
+        .pub-link:hover{color:var(--navy);}
+        .in-prep-note{background:var(--warm-gray);border:1px dashed var(--border);border-radius:6px;padding:14px 18px;margin-top:16px;display:flex;align-items:center;gap:14px;}
+        .prep-pill{background:linear-gradient(135deg,var(--navy),var(--blue));color:white;font-size:.68em;font-weight:700;letter-spacing:.07em;text-transform:uppercase;padding:3px 9px;border-radius:3px;white-space:nowrap;}
+        .prep-desc{font-size:.85em;color:var(--text-muted);line-height:1.45;}
+
+        /* PAPER DEEP-DIVE STRIPS */
+        .paper-strip{border-radius:10px;overflow:hidden;margin-bottom:20px;border:1px solid rgba(0,0,0,.1);box-shadow:0 2px 12px rgba(0,0,0,.06);}
+        .paper-strip-header{padding:22px 26px;color:white;cursor:pointer;display:flex;justify-content:space-between;align-items:flex-start;gap:16px;transition:filter .15s;}
+        .paper-strip-header:hover{filter:brightness(1.08);}
+        .ps-left{flex:1;}
+        .ps-num{font-size:.68em;font-weight:700;letter-spacing:.12em;text-transform:uppercase;opacity:.7;margin-bottom:6px;}
+        .ps-title{font-family:'EB Garamond',serif;font-size:1.18em;line-height:1.35;font-weight:500;margin-bottom:8px;}
+        .ps-tags{display:flex;flex-wrap:wrap;gap:6px;}
+        .ps-tag{font-size:.67em;font-weight:600;letter-spacing:.05em;padding:3px 9px;border-radius:3px;background:rgba(255,255,255,.15);}
+        .ps-chevron{font-size:1.4em;margin-top:4px;transition:transform .25s;flex-shrink:0;}
+        .ps-chevron.open{transform:rotate(180deg);}
+        .paper-strip-body{background:var(--white);padding:0 26px;max-height:0;overflow:hidden;transition:max-height .4s cubic-bezier(.22,1,.36,1),padding .3s;}
+        .paper-strip-body.open{max-height:1000px;padding:22px 26px;}
+        .paper-body-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px;}
+        .pb-block h4{font-size:.73em;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--blue);margin-bottom:8px;border-bottom:1.5px solid var(--warm-gray);padding-bottom:5px;}
+        .pb-block p{font-size:.88em;color:var(--text-muted);line-height:1.65;}
+        .pb-block ul{list-style:none;padding:0;}
+        .pb-block ul li{font-size:.87em;color:var(--text-muted);line-height:1.6;padding-left:14px;position:relative;}
+        .pb-block ul li::before{content:'→';position:absolute;left:0;color:var(--blue);font-size:.8em;}
+        .paper-stat-row{display:flex;gap:0;margin-bottom:18px;border:1px solid var(--border);border-radius:7px;overflow:hidden;}
+        .paper-stat{flex:1;padding:12px 0;text-align:center;border-right:1px solid var(--border);}
+        .paper-stat:last-child{border-right:none;}
+        .ps-val{font-family:'EB Garamond',serif;font-size:1.6em;font-weight:600;line-height:1;display:block;}
+        .ps-lbl{font-size:.67em;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--text-muted);margin-top:3px;display:block;}
+        .paper-lithium .paper-strip-header{background:linear-gradient(135deg,#0f3a5c,#1a5a8a);}
+        .paper-polycation .paper-strip-header{background:linear-gradient(135deg,#2d0f5c,#4a2a8a);}
+        .paper-polyanion .paper-strip-header{background:linear-gradient(135deg,#0f5c3a,#1a8a5a);}
+
+        /* PRESENTATIONS */
+        .pres-item{display:grid;grid-template-columns:72px 1fr;gap:0 18px;margin-bottom:18px;position:relative;}
+        .pres-item::after{content:'';position:absolute;left:71px;top:20px;bottom:-18px;width:1px;background:var(--border);}
+        .pres-item:last-child::after{display:none;}
+        .pres-yr{font-family:'EB Garamond',serif;font-size:.9em;color:var(--text-muted);text-align:right;padding-top:1px;}
+        .pres-dot{position:absolute;left:66px;top:5px;width:12px;height:12px;border-radius:50%;background:var(--blue);border:2px solid var(--cream);box-shadow:0 0 0 1.5px var(--blue);}
+        .pres-ttl{font-size:.87em;font-weight:500;color:var(--navy);line-height:1.4;margin-bottom:4px;}
+        .pres-conf{font-size:.78em;color:var(--text-muted);}
+        .pres-badge{display:inline-block;font-size:.65em;font-weight:700;letter-spacing:.05em;text-transform:uppercase;padding:2px 7px;border-radius:3px;margin-left:6px;}
+        .oral{background:rgba(39,86,168,.1);color:var(--blue);}
+        .poster{background:rgba(192,154,62,.12);color:#8a6a1a;}
+
+        /* EXPERIENCE & EDUCATION */
+        .exp-item{display:grid;grid-template-columns:200px 1fr;gap:0 28px;margin-bottom:32px;padding-bottom:32px;border-bottom:1px solid var(--border);}
+        .exp-item:last-child{border-bottom:none;margin-bottom:0;padding-bottom:0;}
+        .exp-left{padding-top:2px;}
+        .exp-role{font-family:'EB Garamond',serif;font-size:1.05em;font-weight:600;color:var(--navy);line-height:1.3;margin-bottom:5px;}
+        .exp-org{font-size:.82em;color:var(--blue);font-weight:500;line-height:1.4;margin-bottom:5px;}
+        .exp-date{font-size:.75em;color:var(--text-muted);letter-spacing:.03em;}
+        .exp-bullets{list-style:none;padding:0;}
+        .exp-bullets li{font-size:.87em;color:var(--text-muted);line-height:1.65;padding-left:16px;position:relative;margin-bottom:8px;}
+        .exp-bullets li:last-child{margin-bottom:0;}
+        .exp-bullets li::before{content:'▸';position:absolute;left:0;color:var(--blue);font-size:.85em;top:1px;}
+        .edu-item{display:grid;grid-template-columns:200px 1fr;gap:0 28px;margin-bottom:14px;padding:14px 16px;background:var(--white);border:1px solid var(--border);border-radius:7px;align-items:center;}
+        .edu-deg{font-family:'EB Garamond',serif;font-size:1em;font-weight:500;color:var(--navy);line-height:1.35;}
+        .edu-school{font-size:.82em;color:var(--blue);font-weight:500;}
+        .edu-date{font-size:.75em;color:var(--text-muted);letter-spacing:.03em;text-align:right;}
+        @media(max-width:700px){
+            .exp-item,.edu-item{grid-template-columns:1fr;}
+            .edu-date{text-align:left;margin-top:4px;}
+        }
+
+        /* SKILLS */
+        .skill-group{margin-bottom:26px;}
+        .skill-group-title{font-size:.75em;font-weight:700;letter-spacing:.09em;text-transform:uppercase;color:var(--navy);margin-bottom:12px;padding-bottom:5px;border-bottom:1.5px solid var(--warm-gray);}
+        .skill-row{display:flex;align-items:center;gap:12px;margin-bottom:8px;}
+        .skill-name{font-size:.85em;color:var(--text);width:200px;flex-shrink:0;}
+        .skill-bar-bg{flex:1;height:5px;background:var(--warm-gray);border-radius:99px;overflow:hidden;}
+        .skill-bar{height:100%;border-radius:99px;background:linear-gradient(90deg,var(--navy),var(--blue-light));animation:growBar 1s cubic-bezier(.22,1,.36,1) both;transform-origin:left;}
+        .skill-bar.gold{background:linear-gradient(90deg,#a07c28,var(--gold-light));}
+        @keyframes growBar{from{transform:scaleX(0);}to{transform:scaleX(1);}}
+
+        /* SIDEBAR */
+        .sidebar-card{background:var(--white);border:1px solid var(--border);border-radius:8px;overflow:hidden;margin-bottom:18px;}
+        .sc-head{background:var(--navy);padding:13px 18px;}
+        .sc-head h3{font-family:'EB Garamond',serif;font-size:1em;font-weight:500;color:var(--gold-light);}
+        .sc-body{padding:16px 18px;}
+        .c-row{display:flex;align-items:flex-start;gap:10px;margin-bottom:13px;font-size:.83em;}
+        .c-row:last-child{margin-bottom:0;}
+        .c-icon{width:26px;height:26px;background:var(--warm-gray);border-radius:4px;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+        .c-icon svg{width:13px;height:13px;color:var(--navy);}
+        .c-lbl{font-size:.7em;letter-spacing:.07em;text-transform:uppercase;color:var(--text-muted);line-height:1;margin-bottom:2px;}
+        .c-val a{color:var(--blue);text-decoration:none;font-weight:500;}
+        .c-val a:hover{text-decoration:underline;}
+        .tag-cloud{display:flex;flex-wrap:wrap;gap:6px;padding:14px 18px;}
+        .rtag{background:var(--warm-gray);border:1px solid var(--border);color:var(--navy);font-size:.73em;font-weight:500;padding:4px 9px;border-radius:4px;}
+        .rtag.hl{background:rgba(39,86,168,.08);border-color:rgba(39,86,168,.2);color:var(--blue);}
+        .funding-item{display:flex;gap:9px;margin-bottom:11px;font-size:.82em;}
+        .f-badge{flex-shrink:0;font-size:.67em;font-weight:700;letter-spacing:.05em;padding:3px 7px;border-radius:3px;text-transform:uppercase;height:fit-content;margin-top:1px;}
+        .doe{background:#fff3cd;color:#7a5700;}
+        .nsf{background:#d1e7ff;color:#0a4285;}
+        .f-desc{color:var(--text-muted);line-height:1.4;}
+
+        footer{background:var(--navy);color:rgba(255,255,255,.45);text-align:center;padding:22px 40px;font-size:.8em;}
+        footer a{color:var(--gold);text-decoration:none;}
+
+        @media(max-width:900px){
+            .hero-inner,.page-body{grid-template-columns:1fr;}
+            .hero-photo-col,.nav-links{display:none;}
+            .paper-body-grid{grid-template-columns:1fr;}
+        }
+        @media(max-width:600px){
+            .hero{padding:100px 22px 56px;}
+            .page-body{padding:40px 22px;}
+            .hero-stats{gap:18px;}
+        }
+        .fade-up{opacity:0;transform:translateY(16px);animation:fadeUp .55s cubic-bezier(.22,1,.36,1) both;}
+        @keyframes fadeUp{to{opacity:1;transform:translateY(0);}}
+        .d1{animation-delay:.1s}.d2{animation-delay:.2s}.d3{animation-delay:.3s}.d4{animation-delay:.4s}
+    </style>
+</head>
+<body>
+
+<nav>
+    <div class="nav-inner">
+        <a class="nav-brand" href="#">Elnur Jabiyev</a>
+        <div class="nav-links">
+            <a href="#publications">Publications</a>
+            <a href="#research">Research</a>
+            <a href="#experience">Experience</a>
+            <a href="#presentations">Presentations</a>
+            <a href="#skills">Skills</a>
+            <a href="#contact">Contact</a>
+        </div>
+    </div>
+</nav>
+
+<section class="hero">
+    <div class="hero-inner">
+        <div>
+            <div class="eyebrow fade-up">PhD Candidate · Chemical Engineering · Auburn University</div>
+            <h1 class="fade-up d1">Elnur Jabiyev</h1>
+            <p class="hero-sub fade-up d2">Materials &amp; Chemical Engineer &nbsp;·&nbsp; Membrane Science &amp; Polymer R&amp;D</p>
+            <p class="hero-bio fade-up d2">PhD candidate in Chemical Engineering with hands-on expertise across materials science, polymer chemistry, surface science, and separation science. I translate fundamental polymer and surface chemistry into high-performance thin-film composite membranes with precisely tailored selectivity for water treatment, desalination, and critical mineral recovery — including 120-fold Li/Mg selectivity, the highest reported for polymer-based pressure-driven systems.</p>
+            <div class="hero-stats fade-up d3">
+                <div class="stat"><span class="stat-num">2</span><span class="stat-lbl">Publications</span></div>
+                <div class="stat-div"></div>
+                <div class="stat"><span class="stat-num">6</span><span class="stat-lbl">In Prep</span></div>
+                <div class="stat-div"></div>
+                <div class="stat"><span class="stat-num">$1.4M</span><span class="stat-lbl">Funding</span></div>
+                <div class="stat-div"></div>
+                <div class="stat"><span class="stat-num">13</span><span class="stat-lbl">Presentations</span></div>
+            </div>
+            <div class="hero-btns fade-up d4">
+                <a href="Elnur_Jabiyev_Resume.pdf" class="btn-gold" download>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                    Download CV
+                </a>
+                <a href="https://scholar.google.com/citations?user=qDRpqsYAAAAJ&hl=en" target="_blank" class="btn-ghost">Google Scholar →</a>
+            </div>
+        </div>
+        <div class="hero-photo-col fade-up d2">
+            <div class="photo-circle"><img src="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYEBAUEBAYFBQUGBgYHCQ4JCQgICRINDQoOFRIWFhUSFBQXGiEcFxgfGRQUHScdHyIjJSUlFhwpLCgkKyEkJST/2wBDAQYGBgkICREJCREkGBQYJCQkJCQkJCQkJCQkJCQkJCQkJCQkJCQkJCQkJCQkJCQkJCQkJCQkJCQkJCQkJCQkJCT/wAARCAGQAZADASIAAhEBAxEB/8QAHwAAAQUBAQEBAQEAAAAAAAAAAAECAwQFBgcICQoL/8QAtRAAAgEDAwIEAwUFBAQAAAF9AQIDAAQRBRIhMUEGE1FhByJxFDKBkaEII0KxwRVS0fAkM2JyggkKFhcYGRolJicoKSo0NTY3ODk6Q0RFRkdISUpTVFVWV1hZWmNkZWZnaGlqc3R1dnd4eXqDhIWGh4iJipKTlJWWl5iZmqKjpKWmp6ipqrKztLW2t7i5usLDxMXGx8jJytLT1NXW19jZ2uHi4+Tl5ufo6erx8vP09fb3+Pn6/8QAHwEAAwEBAQEBAQEBAQAAAAAAAAECAwQFBgcICQoL/8QAtREAAgECBAQDBAcFBAQAAQJ3AAECAxEEBSExBhJBUQdhcRMiMoEIFEKRobHBCSMzUvAVYnLRChYkNOEl8RcYGRomJygpKjU2Nzg5OkNERUZHSElKU1RVVldYWVpjZGVmZ2hpanN0dXZ3eHl6goOEhYaHiImKkpOUlZaXmJmaoqOkpaanqKmqsrO0tba3uLm6wsPExcbHyMnK0tPU1dbX2Nna4uPk5ebn6Onq8vP09fb3+Pn6/9oADAMBAAIRAxEAPwDssUYp2KCK+iPEGEUmKcRRimA3FIRTiKTFADTRinYpMUANxSEU6gigBmKTFPxSEUAMxRin4puKYDcUmKeRSYoAbSYp2KMUANxSYp+KTFADcUhFOxRigBmKTFPxRigBmKMU7FJigBuKMU7FJigQ3FFOpKAG4op2KTFADTRinYpMUAJikxTsUUAMxRTsUlADcUYp1JigBKTFOpDQA2g06kxQA3FGKdijFADaTFOooAbikxTsUUAb2KMU4ikxUDGEUYpxFIRTAbSYp+KbigBpFGKdikxTAbikIp+KQigBmKMU7FJigBMUmKdikoAaRSYp+KTFMBuKTFPxRigBhFJin4pCKAGYpMU/FJigBpFJin4pCKAGkUmKdijFADcUmKdikIoAaRQRTsUlAhuKMU6kxQA2jFOxSYoAbRTqTFADcUYp2KTFADcUYp2KTFADSKMU4ikxQA3FGKdikoAbijFOxSYoATFJinUlACYpMU7FFAG+RSYp+KTFQMZikxT8UmKAGYoxTsUmKAG4pCKfSYpgMxRinEUYoAZikxTyKTFMBmKMU6gigBmKMU7FJigBKQinEUmKAG4oxTsUlADcUmPWn4pKYDcUhFPpMc0AMxRinlaQigBmKSn4pMUCGYoxTse1GKAGYoxTsUEUAMxRTsUYoAbikxTsUYoAZijFPxSYoAbikxTsUYoAZijFOxRigBmKKdijFADaTFOxRigBpFJinYoxQA3FJinYoxQB0GKQin4pCKgYzFJTyKTFADMUYp+KTFADMUmKfikxQAzFJin4pMUANxSYp+KTFMBmKTFPxRigCPFGKfikxTAbikxT8UmKAGYoxTqMUAMxRinYoxQA2kp1JigBMUmKdikxQA3FIRT8UhFFxDMUEU/FJigBmKMU7FGKYDMUYp2KTFADcUYp2KMUAMxRinYoxQAzFJin4pMUANxSYp+KTFADcUmKfikoAbijFOxSYoAbikxT8UmKAG0Yp2KTFAHQkUhFPxQRWYyMikxUhFJigBmKTFPxSYoAZikxT6TFADcU3FSYpuKYDcUhFPxSYoAbikxTsUYoAZikxT8UYpgMxSYp+KTFADcUmKdijFADMUYp22jFMBmKMU7FGKAGYpMU/FJigQ3FJin4pMUANxSYp+KTFADcUmKfikxQAzFIRUhFJtoAZikxT8UYoAZikxT8UmKAG4pCKfikxQA3FJinEUYoAbSYp2KMUAMxRin4pCKAG4pMU7FGKAG4pMU6jFAHQ4oxT8UhFZjGYpMU8ikIpgMxSEU/FJigBmKQipMUmKAI8UYp+KQigBmKTFSYpMUAMIpMU/FJimAzFGKdigigBmKQin4oIoAZikxTyKTFAhmKCKdijFAxmKTFPxRimAzFJin4oxRcQzFJin4oxQAwikxTyKTFMBuKTFPxRikAzFJin4pMUwG4pMU/FJigBpFJin4pMUAMxSYp+KTFADMUYp+KTFADMUU/bSYoAZijFPxSYoAZijFOxRigBmKMU7FGKAOixSYp5GaMVlcZHikxUmKQigCPFGKfikxTAZikxT8UYoAZikIp+KQigBmKMU/FJimAwikxTyKTFADMUmKeRRigBmKTFPxSYpgMIpCKfigigBmKTFPxSYoAZijFPxSYoAZijFPxSYoEMIoxTsUYoAZijFOxRigBuKTFPxSYoAZikxT8UYpgMxSYp+KMUAMxSYp+KTFADSKTFPIpMUXAYRSYp+KTFMBuKTFPxSYoAbikxT8UhpANxSYp+KTFMBmKTFSYpMUAdHikxTsUYrEYzFJin0mKAGEUmKeRSYpgMxSU/FJigBuKTFPxSYpgNxSYp1GKAGYpMU+jFADMUmKfikxTAZikxUmKTFADMUmKfigigCPFGKfikxQAzbRin4pMUAMxSYp+KTFADcUmKfikxTuIZiin4pMUANpMU7FJigBpFGKdikxQA3FGKdikoAbikxT8UmKAG4pMU+kxQAzFGKdRigBmKTFPIoxQAzFJin4oxQAzFGKdijFADMUmKfikxTA6LFGKeRSYrEoZikxTyKTFFxDMUmKfijFO4DCKTFPxSYoAbikxT8UmKYDMUhFPxSYouAzFGKfikxQAzFJinkUmKYDcUmKfikxQA3FJin4pMUAMxRT6QigBmKMU7FGKLgMxSYp+KMUwGYpCKfikxQAzFJipMUmKBDMUmKfik20AMIoxT8UmPagBmKTFPIoxQBHijFPxSYoAYRRinYoxTuAzFGKdijFIBmKTFPxRigBmKQin4pMUANxSYp+KTFO4DcUmKfikxQB0mKTFPxSYrEojIoxTyKMUXAjxSYqQikIouAwikxT8UmKYhmKTFPxRigBmKTFPxSYp3AZijFPxSYouAzFJin4oxQAzFNIqTFJigBmKTFPxSYp3AZijFPK0mKLgMxRin4pMUAMIpMU/FGKYDMUhFPIpMUANxSYp+KMUAMxSYp+KMUAR4oxin4oIoERkUYp+KTFADMUm2n4oxRcCPFJipMUmOaAGYpMU/FGKLgR4oxT8UhFFwGYoIp+KTFMBmKMU8ikxQAzFGKeRSYoA6TFJipMUmKwuWR4pMVJikxTAZikxT8UmKLiGYpMVJikxRcCPFJipCtJtpiGYpMVJtpMUXAjxSYqTFJimBHijFPxSYoAZikxUmKTFADMUmKfikxTuAzFGKfikxRcBhFJin4oxQAzFJin4oxQBGRRin4pMUwGEUmKkxSYoAZijFPxSYoAbikIp+KTFFwGYpMU/FGKLgR4oxT8UYouBGRRin4pMUXAZijFPxSEUxDMUhFSYpCKQDMUmKfijFMCPFGKfijFAEeKMU/FGKAOjxRipCKTbXPcuxHikIqTFIRTuBHikxUmKTFFwI8Um2pcUmKdwI8UmKkxSYoEMxSEU/FJimAwikIqTFIRRcCLFGKkxSYouAzFNxUuKTFO4iPFJipMUmOaLjI8UYp+KTFFwGYpMe1PxRii4DMUmKeRRii4hmKTFPxRincCPFGKfikxQA3FJtp+KTFADCKMU/FGKLgR4pMVJikxTuAzFJin4oxQAzFJin4pMUAMxRin4pMUAMxSEU/FGKAGYpMU/FGKAGYpNtPxRigBmKTFPxRigLHS7aTFSYpMVz3LI8Um2pCKQincCPbSFak20YouBFtoxUm2kxRcViPFJipCtJtp3CxHijFP20baLgR4pNtSYpMU7gR4pMVJikxRcCPFGKkxSFadwI9tJipMUbaBEW2jFSYpMUXAj20m2pNtG2mBFto21Jik20XAjxQVqTFJii4WI8UmKk20YouFiPFJipMUmKLhYZikxUmKTFAEe2jFSEUmKdwGYpMVJikxRcRHikxUmKTFFwI8UYqTFJii4EeKTFSEUmKLgMIoxT8UYouBHtoxT8UYp3AjxRtp5FGKLgdJikxUmKMVy3NSPFJipCKTbTuIZikxT9tIRTuAzbSbakxSbaLhYZikxT8UYouFiMik21JijHtRcRFtpCtSlaQrTuBFtpNtS7aTFO4Ee2kxUm2jbRcCPbSEVJtpNtFwI9tIVqXbSbadwI8UmKl20hWi4rEW2jbUmKTFFwsRkUmKl20m2ncCMikxUm2kK0XAZtpu2pcUmKLgR4pMVLikxRcCPFJipMUmKLgRkUmKl20m2ncRGRSYqQrSbaLhYZikxUm2k20XAjxRin7aMUXAjxRinlaMUXCxHijFPxQRRcLEeKNvGTwBUgXJxWH4j1n7Ggtrf5pn4AFZVqypxua0qTmzv9tJin4oxWVwsR4oxT8UYp3AjxRin4pMUXAZikxUmKTFO4hmKTbUmKQii4WGYpNtPxRincLEeKTbUhFIRRcLEe2jFSEUmKLgR4oxT8UbadxEeKTbUpWkxRcLEe2kIqTbSYp3CxGRRipMUmKLhYj2+1JtqXbRii4WIttJtqXFJtp3ERbaNtSbaTbRcCPFIVqXbSbaLgRYpNtSlaTFFwIttG2pCtG2ncCLbSbalIpMUXAjxSbak20baLgRYo21JikxRcCPFIRUuKTbRcLEW2jFSYo20XFYixRtqQipoIhgyN91amc1FXZUYOTsjL1e9TSrJ5XOGxwKwNC0qS/uDqF2CWc5UHsKbqt6mt675DPi2tzz/ALTVsSa1Z2EYjRlyB0FcMJqpL2k3ods4uEeSB3GKTFSYpMVtc5rEeKMU/bRincLEeKMU/FJii4WGYoxT8UmKLisMxRin4pMU7hYZijFPxSbaLhYYRSYp+KMU7isMIpCKfijFFwsR4oIqTFJincCPFRXMhhhZ/QVZxVLVZo4LOQyMAMUmxpanEXvxIWCSSFIW3oxXmqQ+JM5HEI/OuQ1Fle/uCvILnBqvnHGDWPtH3Oj2aPQLT4lpjE0LA+3NTj4m2pbHlSflXm+dvJzTBKmc80e0YeyR6afiXaA/6qT8qU/EmzA+4/5V5p56E5oM6txmn7Vi9kj0v/hZVltztf8AKlT4k2JGSr/9815i0oAxzQsgI60e1YexR6cvxIsCeQ/5VvaHrsOtxeZDnbnHIrxNZByTnFejfDS5jNq0e4Z3HiqjUbZE6aSud1tpMVJikK1tcxsMIpuKlxSYouFiMikxUmKTbRcRHikIqXFIVouBHikxUmKTbTuBHijAqQrSbaLhYjxSYqTbSbaLhYZikK1IVrM1XWYNOTGd0h6KOppSmoq7HGDk7Itu6R4DEZJwBVTxVqo0rSCsR/fSfImPU1U0W1vtSuvt13mOFOVT+prPv3Ot+JkgHMNqPw3V5VevKtUVKOx6VGkqUHUe5maR4au5lErkpu5PrXQWvhWCM5kG4+prfjhESBQMYqveXsVnGWdhmuuOHpwV5HK685u0TqMUYp+KTFO5NhmKTFP20FaLisR4oxT8UmKdwsMxRin4pMUXCwzFGKfikxRcVhmKMU/FJincLDMUYp2KMUXCwzFJin4oxTuIZijFOxSMODRcBYlV2wWFcH8RtQMeLKMnLjOR2qPxBrmoWOpskE5VfTFYV3cS6hIZrlt71m4TlK6ehrGcIrVanNmHB5Wm+X/s/pXQC2jYcqKkWzhx90VX1fzD6z5HMyRFhjb+lQw6eCTv6V14sISM7a5vxdr1r4eWOCG2FzeSjKpuCrGv95z29h3qZUuRXbKhVc3ypGfqv2HSLNrm4lWONe57n0A7muTl8b2ilTa2c0wbIEjnYv8AXP4Vm6heRaneCfUbsXNyWxBbSA+UAR2A6n68VxurvdDMUkkQ8snPl8gD/P5Vze0vsdqpWWp1eqfEw+UyWvkxyE43KpcqP5Vn2/xC1pWz9uMsePuPAvFcU5UlfnLnGPlXHf8AWpY3gj+aUNK46IGG38T/AEFMD1Kz8ezTW6vcWkLRKOWXKMx/LH611/gn4h6TaagjzSz2sXRiy5UE/Tn9K8TtNWluUdZpUHTG5eFHsB3ou1ukaKaKZpMLuVWxjg+nFKLaYpQTR91aVqtlq9lFc2VxHPE4yHQ8GrmK+MvBPxG8ReGJkuLeXzYs/PbncEIPf2717/4d+KL61YpexwPtJ2uh6ow6g11xqp6HBOg46nppFJiuYtPHNpLhZQUJ/vCuktrhLqMSIQQa05jJxsOxRin4pMU7isMxSFakxSEUXCxGVpNtSbaTFFwsMxSbafijFFwsR7aNvepMVnaxqH2KHanMr8KB61MpqKuxxhzOyKetav8AZh9ntx5k7cACoNK8Psz/AGu+PmTNzz0H0qxpWnRW4N3eOGmbk57e1XhrNr56xIwJJ6CsdPjmb6/DAl1OdNM0qRxgYU1zXgu0Lxy30g+aZi2T6Vc8eXpXSSq8FhjH1rI0zWntNMWELghcZrio1Y+0lUZ11acuRQR0mp6rFZRn5stXGXuoTX8vJPzdB6CmSzTX0x3MSTyfYVNZRLG0juM4FTXxDmVSoqB7BijFOxRiu25w2GEUmKfijFO4rDMUmKkxSYouFhmPakxUmKTbTuFiPFGKkxSbaLhYjxRipNtJtouKxHijFSbaTbTuFiPFGKfijFFwsR7aRh8pqQikYfKfpRcLHlniwf8AE1asaV3SLK9a3fFa51VvpWJcoogPX8K2g/dM5fEZ6394Om2pkvrzuq1SVUGeXqZEXGQXo5h2RDrfi06PaHfsNw4IjTPJ9/oK5K90mW70i21SZBJJKGlklJwzkkbVz+X6ccGti9tlv765jkMj+WsaRIibjuZhknvgAGuzk0qO98IrbTQyQs8cogwDkIcYHHc8ce5rxcbi7T5We5gcKuTmW7PmbXL4qwh84KFLEiMkjPrn1PrXOTXLOxJOSevJPavVtd+Gl1DehJI1RSg3k8gN3Ax1xwKxZPh6Vl8tYmB9TWkK8LaFTw87nngP0pea7q58HLACqIHC/ebHAqTT/Ac12PNkDQxdtxwW/CqdeKVyPq027HF2tnLP8oIU54z2rVi03UIgMyMQe/UV6TpPgW0tQC4LNnP0rpDodnHbj91uyewzXNPGJPQ6oYF21Z5F9t/s+JEaECVjndnlzjpjsPeuw+EPjGJdTn0i8YI1zgxehcdR9T/Sr+t+D5ZYzfLBErICyKRzn1NeafZZ9I1WK6RmUpJvX2IOa6MPXTd0cmKw7S5WfTbwowzgVq6Rrl3ZFYshkziuVt7lpraGeOXcJEVwR05Gav6ZNK1wgZsjIr1bpniWaPW7WQzQK57ipttRacv+ip9Ksbam47Ee2k21KVpMe1FxERWkxUpFJii4Ee2kIqTFVLy9W3wi8uegFJySV2NRbdkSSyLBC0rnAArhpH1HW9VM0CEQIcKx6H3re1Gea9ljs1yN55+lbdpZw2cKooUYFcsX7Z83Q6pfuVbqYkWgz3ABupmI/ujgVp2GjWlo+5UXcB1qzdXcVrEXZgAKx9I1Z9WvpfLz5SMFz60sROFOD7jw8Zzkuxi/EKQF4YgcKX/kKw4IywRG4UjJ+la/jmIz6hbRjPUk1nQguxAHTivMhK0T0Jr3hyARM7r6c1PBaTz2gVELSTHP51o6b4cuLyAFgVVzk+tdrp2kw20aKEGVAFc1XEJaI1hSb3NfFFOxSYr3rnjWG4oxTsUmKLgJSYp2KTFO4WExSYp2KKLisNoxTqTFFwsNxRinUlO4WG4oxTsUmKLhYTFJinUUXCwzFI4+Q0+kYfIaLiseXeKV/wCJo9Ytyp8g4IFbvigZ1V6xLoDyema3g/dMpfEZCh8ffSpoy46spqEKP+eJqeJRgfujgUXGSaB4efVfEUjTArBIqq2ONwHOB+X1r2uz0i3toSHjV0wCMjpiuI8JwQm2E6RPGx+Qlu5z1H59T6V6DAzLpimQgFVPPTj1r5TGyvWkj6XDtqjGx514zsNPEbyRRpndxtH8XXp9K8vuIcSN8mM+orp/HXxW0Cwu3gS5RipO7aMjjj8eleaTfFDS766OxZiWbjEZwBWtClPl1R0zqwTtc3DaxEbfLUA4zgdac0agYCgY6VDZa5bX6FowQAcZIxmor/WEsl3iJpecYWqcXsWpK1zRhjYjpViMkcZxXCT+O9XErR2+hzSKDgNuxTo/GeuqNz6NNFnkEjcPxpOhJiWIitD0z7L9st2j/wBn8a8p1zQ9xbK/MGPGP1r1LwbrEWt2omEbRyqMSQt1Hv7isHxlpZsb0xg/u7nc8R+vVfwIqcPJwm4sjEpTipI0dBVk0Gx3YJWBRn8K2dIO+4U4/iFY2jI48PWjMjrmIEFu4ycVqeHnDTLz0YV9HCWiPlqkdWeyaeP9FT6VZ21Fpwzap9Ks7adyLEW2jbUhFJii4rEZWk21IRUM9xHboWcjgUOSSuxqLbsinql/Hp8DO7AHFZml3EE6yXcvzHtmll03+3bjzLh8QKchc9an1mO10zSmEOBxjiuSvOTjc7KMIqVjGsre/wBQ1Sa7hISEHauatak91arue5APpSW2uQWOlqsXLkcVzt5fyXcpeRiSe1Q5KEbRZcYuUuaSG6tqk8kJBkLVtfD0EQyk9TJ/SuUm3zXCxgH+9ivQPBWnyWlh+9QqWYtzXDXn7up1Uo+9oY/imFpdSiVBlypA/E1e8L+EGt5GuLxvMdjwD0Wpb+ISa7Bx0H9a663UACuCrVaXKjqjBbsbHbpEoVQABUsXBpWFEY5rkNifFFLiivrLnz9hKQ06kxRcVhtFOpKdwsJik20/FJii4WG7aCKdijFO4rDMUYp9JRcLDcUmKfikxRcLDcUmKfijFO4rDMUjj5TT8Ujj5D9KTYWPLvFEipqMueorDdhLali2MU/x1fSJr0kKcDFRW5ZtPzgE+9XTkxVIrczRtH/Lc1OmCOJjSASf88kNTxqxXBjStLkWOn8PWl7pixJdTb0uUNxEoGVCgDIyO/fHbNd3rzM2kmJZGj3qEyh5OR2rz+yuILCO8N3IkTX96sdunJJQRKAV9BuIBPeu08RxNcWqR7nULgkocEcetfI4iblUcmfXQwypqEVqrHz9488IaJ4bujct5UyTMzb5nBLtnDbe7AHIJAxkYzXGtqWlPkQxxhQASUBGAenUCvZ/iFY6LPorRWWmyR3EiCGbA5lRRgZz2x6Yrya18K+UGigsVt4m+9vOS31HevQozUoe9uRODT0WhZ8Ookty8e07duRkdK0dZt1ijQKmTjIxXR6B4VXT/Dl/qlxEA8hjhtifQEliP0FUbqzSeCOTOWBIIx0qJyTehrThpqcHcapJZvIsduXaJC7ADn6c8Z9uTU2i+L3vXJfTpyiY3bQHY5OOFIBP4V0E+giV9ySsjfpVqw0qa2lVhMMr/sVbnBx2J9nO+5r+H7u0S+jmt1eLI2SRkFcH6HnHtVjx/H59np7IiljP5WWHQNjmltbdywdm3t6kVa8Vhv8AhGpZVH72EpIpIzggjBrjTtNM0lD3bGFp0lxYy2+jSEzRvas4nZycMhxsUdABWr4c/wBaRkHDDn8ay9Cu5761F1dFTJaB1VsAZDjBH6ZrS8LuJJmOAPm6fjXu4KTcPePDzanGFW0V0PbtMX/Q0+gq0cDqRVaxkWPTlYkcLXnfiHxhqMWoSQ2jR+WvBJPeunnR5iptnopvIBJ5fmLn61Pwe4rwSXXtUbUvO+0v5oPY/L+VdLovijxBcXCrL5flL1POcUnNJXZXsW9Eem31ytpCXPXsK5q7a41J/KBKZ6VJp+rtqN3slwQgyalnBmvPMVtgj5AFc1SpztLodFOnyJvqXLPRGtLdVlnYjvWL4xKR2GxGJzx1pJ9cuZ5lg3jaWxkUzxLCXskABJOBWGIqptRRtRpNJtnNKwSFVGelWdO024vpB5aE+/atjRfCr3arLcjC/wB2uzs9OgsYhtQKAK4q2KS0idNOi3qzF0nwrBDIs8yhnHc9qmv9ZjstUtrCErmUnIz04rbZTNEfKOM965xvB2NUXUpLiR5VOQCeK44yu7yZu1bYHUDWkY8/uifpzW9ptybh3BGNpxXP3W4atGF4PlkfrW5o1tJAZC5zubNFUcUabCiMc1HcXcNshaWRVA9TXGa58VNJ012t7Qve3I4EUA3HPuegrOMHLYbaR3+KMGlor6TmPEsNxRinUmKfMFhuKMU7FGKOYVhtJT8UhFHMFhtFLijFHMKwlJS4oxTuFhMUYpcj1FMlkWFNzEYouFhaMVBHqFtJwJV/OqGteI7TSYS7yLnsAeTT5gsa2KSQfuz9K8/svipZXmprZj5WJwcnpXepOk9tvRg2R2NJTT2DlPnn4m3T2/itiufu4/WtHTZRJpQZ89Kw/ihLI/iuUYxtHHvTfDtzPPasjSDAFKGIV+WxU6TauaYntMHLvx15qVLq0CZErfnXIX2qyWFxIjyIQc1QTWLi5VtkiKM+lCxN3awew0PR0WbVrC2nsxJO+mT5de6xE7w3PYEN+lezoi31oJgMh03D8RmvCPh1r32K42X1xGtpcI0M+R/Cwxn8DzXsmlajDa6XCInEkUW6EMDkMqkgc/TFeFjI2qc3c+gw9WVSjGHWJ534znjW9MKgfL1NcLf6mouEtYWUSSMF3E8Lk4zVn4ka89nq18EyW8wqoPb3P0FcPbyXdxlkikdmbl/WuyjC8UaVaqWh9AeKrCDTPBemWqXkVyYQTJIj7gxJyD9K4P7RbLaziSWNQyYUk9D2rgxceIrWCaK01NYIZwUeGWXchH+6c4+owaonT767eNr/AFG08pBnYshOG9QMfzo9hbdkwrO2iOsmuXjlb7JOsoAzycgn0qzpuvQXDmKUeXOv3kb+f0rmoRFDHhtUt0C+vQ/4VQvYVumMtpqEcsseGDQnJT3OKSprYp1WtbHrulSRzOAO9T+KkWTQ5Il2kzOka56Z3CuM8K6jObOKaZsOyHNbusa0ItLhmMe90mR8HgZBrmdNuaSLlWXLzMzryS20d/7NgDbNglYk5OWHQ/5707wjdA3Eu3IGelcj9quL6/uJpHdpJDk10fg6KVJpAQeo5Ne1Sj7OKR4OIqe2m5nsNpfzy6eyb+MYrgNURoryQg5y2a66G+S1siCfmIrFjsxqE7Ssp2k/nXPSk4zbZpOKcUkZGmaU93d+c4IjH6111hZhYyFIG7qaDaraQrEgAY4HHqavzqtnCg6E4ANFSq5aEwhYl0fQzYyS3PnMWcc1k3d9K17cIHO3O2ug0iY3McxJJwcCq+meGGur2Wac/IXJCiud1eVtyZt7O6SRmaZp9xeXCPGp2A5LHpXT3doGeBHwR1q/cJHp1oYreIGTHygetZWbh9vngrJ1xXLKo56m0YqJ0VpEEiAA4xUs0fmxFPWo9PBMAz1xU7ukQJdgBXJ1NWR2kAgiCDtT5h8lZep+IrbTrWS45dUBJ2jJrK8MeK38TCWVYWiiWTaN3U8VapyepLktiDU7j7Pq8BAyWUgD8a1ftt2xAUBFJ61l38fmeIbJfZq17pdkkY+taTWoRehw3xHsLu4swTeTBW6qpwDXGpFH4dtYzFAGZiB9c16V44QHT465DVtHur+3t1trd5TuX7o6VvT2M6jPdaTFLSV6PMebYWkNFFPmCwUUUZo5hWCkozRRzBYKa5CKWPanVHMheMqO4p8wWKFprUN1ePbKwLJ1q5e3UVpCZJHCgDqTXl/je+vvB0r6jaDezHlT3rkdR+LqeJrL7FORbluG+fAo5hqJ2GtfEKdNTNtYyI/JwOuK6W41+OLw+Z9QkVD5eWJOBmvnTVNXj028jlsZg7g+uc/Wn6t8QbjV7AWE8hXjBQZqIyd9SnA65PEF7qGvLHpksptyeq5xUXiPUr2O88mZpZXK/d6gVsfDDU9MsNEaS7RUkOTuYdQK4/xR48t7fxHi3jWcN6cBeelDjoBSENz9sVUV0kdvv4xivfvAVnex6SDc3TzDoC3YV4y/xA0gxxi5hEb5Bye1ek+GfiVpc2kiK3YFlTHHSnFKKE9Tzr4pYk8TzYblRjIrmrW4uLW2Yxt+FaHiu5W8125uJJAfMOevSuTudTS1dozJx2Fcs25S0N0rLUg1DUGuZmWRTu6ZqtBG5b/WbQfeq010zuXYcHpVd2lb7jkVuk7ENHbaQWjCq4aRCcHB617R4GmU6BJaxo0awvvVT0wev6j9a+ftF1Q20eJpMEdDXbaB8Rm0m7hYTB4gcSR9d69x9axq0nUg49TahV9nUT6Gh8RtKSTUZ5ZACX+cMeBuAwf5V57e+GbrVbNJrW5niYAHYjnace1e3+KtPt/E+jw3li6OsiiVDjgqex/z2rzyC1utJYxTQuhUnB24DVOGqe7Y9Gqk3cq6KNEhYLqWkYb5e5YbguDn2zzWnFc+HLVRs0USEy+YMgEkc/Lz07VS1S63p5iWXmuO6MVrAS7vXkH+gRqMn7xY/wBa2nHm1CEoR3NXVYF8QxLYw6fDBHsMbcAtjcW69utMudDttJ0z7FaRohbAbaMce9aFjcyxw/MEjUkcIMVBfzFgS2R1GevHesLtaLYubja5NaOojWJcBQAOB0HatMaXcavEsSk7IX+Zh/EcdPwrn9Pea5uEtrOEyzynaq5GCff0AAya9m0aDTdK0+DTWjHmxr+8kxjzHPJb8e3tiqhpO5y1pXhY47T/AAva2f7xlVm71oJawW7ZjQK38q6DU9L2r5tucr6en0rDVGkcIAeTXTzX1OLltoSW8L3kgXnYDz71uRQCPy4kHzE5OO1P06wEUeFxuPFalvabLlflJJz+VYymWolIW4NzAHODuzVy/wBLm1C4hjj4UHJNaEelK04uZM/KBhewq/ZSpJc4QdM84rmnWtsbRp9ynDZ22kQ+WSNx6k9Sa1NMZWQ4GOaS70yN90rnJ96htL6C3iZtw4PNcs5cyNYqxom3QybyATWLrk0dtPHI+NvSsm58fxTaj9ht433BgCzDAqXxA7SWsbMc5Zf50Rg1uHMjUfWGjtSYI9xA4FeXa74r1y/uZIZZvs0QOMR9fzr0S1TdbkdsVxN7obX99IQ6xgN6ZPWtaUUTN9iG31O6j0r7HjcpUrvc84rt/A1nHDpQZQAS2Tj6VhjSNPtIl+0y7sD+I4FdZ4dkt2sALYDyweMDitOa6Zk1qjPuQR4js/o1a18P3qVh6vdx2Ot2c0zbVG4Zq9L4gsJ5kjSZC5PQGs2mzRMzPGi505Ky5fFP9jadCBbh2+VeTxWx4xXOmpXJatpN7qNlCtrbvIcqeBWtNJx1JqHtdIaTNGa67nFYWikzSZouFhc0UmaKdwsLRTc0Zo5gsONGaTNGaOYVjk/HOi2uq2EiXMmxQCc1826x4ZtDdT28bjdG+AwNfRnxCTGmySs5CoCxwe1fNEl8P7QmZmbYzE89SKmc9kiooyrjQpoJQyzh2PAGarXMd3o5+0T2+5D0YV0jmxnAuI7g70z36fhV/XdY0e58MtBMUMxTHvmtFcGVdCu49c0tx9s8pecqjYOa4+/WGxvysTmU5xnOaj0nSr6aKX7DOYou/eprawtY7Z4biQecCQWz39a10JO5tfAthqWifbZrgeZtz1wPoK5vTtVudBWa1jkDKrEBu+KpT6rd6dbrbx3hZCMYzzisiW8wMliSevNTbsFzRk1G4ubonzGct6moLlF83dMOetZyXJikDq2Kmu9RSZFLHJ71PJqNMllwSCDlfSrNhEm/dJj2zWVLeKihk54qnJf3UjbogwA7iq5G9hpm1f7o5yAMIelXdG0q51K6tY4FLSXE628EY6yyEgYHtyMmp/DXhy71t4ptRLW9pwdxHzS89F/x7V6T8Kra01L4z6fbRRqlppgfyYx0XYpwfruOc+tNRajdlJa3PYI/Cttpmg2uj2jIJ9MQ2wkbOHYYLbvYlifbNcXfXliLh7a/i8m6UlWVyMj8T2OOozmuv8dazL4P8VC6lQyaXqiqJAOsc6jAYfVRgj2FUL2DSPF9mdjpJIo4IO11/qK8SSlCbb2PZpJSpqx434huBaTufKeAliAMDArBi1NTl3kOc8c103jjR7/R0KIouIt2VLZDLxxyOteYXOnai0zGJHRGJIUvwv516tJqcbnHUcoStY6pdYjVtu8EHuT0pj6k2pM4jTABwAOprB0/QtQlYB34J5zzmvQfDOgW9gwuLhAAANobnJ9amq4QVx01Oo7HQeBdC/s2Nbu4QfbJ+M/3E9B9epqv8V4tR0LSNA8f6VM6ssr2l3Fk7Joi7GIsPzGfcelT3+sTTmDS9OBF1eyCCNu67uCR6YGT+FdL+0BDb6b8IZdPQAJF5CRj/dZQP61jhE3U5pdTTFqKgoIl8J+I4Ne06G8glDQyqNyE8xtj7pq/Jpqpf+YBhWNfNXhzxJqGiRQ3FhcvDIo5xyrD0I717f4G+Leh+IEW31iaHTb9cDMjYik91Y9Poa6akHDVbHnwd9Gej2NiGRXzgZJrUghLDai8jkmo7YwiNJBIrIeQVOQfpipBqIjuAkScEV505tnXGKRas4woZZyM+lUrm+hsLsKi53Z6VTkknmvmy5C5HAqO/RRdQ5Pc1mo9yrliDXZ7+eeFk2ImAMnk1nacrGa5znGTjNWdO2rc3HHpUGmzO1zcoUwoY4PrV8thX1Of/suN9eMzPjDg4FdPr7JFZxEjIDL/ADrn5NPafXy/m7VDg7R3roPEESNZxo5+UkA1Ut0QupNZTxTQny2zXD6y9yt7KsBk5b+Cu10+xhtY2MXftXK6hqo068lPlbyW9cVVJahPYi/su9uY1Ahclu7HFd14Z02ew0xUmA3Zzwa459fumMZRY0yfTNd1oWpPfacrOPmB2mpcrXJtsc/r1jFqGsWUMv3WLZHrV1vDen2UsbxxKGzngVFqPGuaef8AaatfUMlo8etQ21sWlcxPFwzpa1z954on0XTIjFAjt8q/McCui8V86WK5LV9FvtT0yIWtu0p+XpW9K1tSKh65LqFvEPmkUfjSpewSciRfzryy91BkiLtKzhfU1xWp/EC9hlaK0kkXHGQa7vYnHzH0SbqAf8tF/OlW4ibo6n8a+UpfHHiNrnJ1KYD0BrovDXi/X3uVEt5NIp9afsWHMfRnmp/eFNa4jA5cV5qmtXskYJuHyail1S5A+e7cfjS9iHMemi7hJxvFKbiH++K8ri1CTOVunH/AqkOqzHj7Wxz70/Y+Ycx6iLiI/wAYpfOj7OK84ivpoYwZLlxn1NNm8QGBDi8b86jk1KKHxo126srNIYCpjlO1j3FeB3yHymkH1r2HxOU8QWj7pfMYDivItWinsA0co2gHHNZzptSTKWqMWzsZrh3k3Mijt61mXwkS4KSEjJwOeKu3utSrGPKUqo71i6nem5CMDyDngV0Qi3uZyOj0XW4NLikhkkC7vun+dYE16JrqVwx2bjtJ9KzWZ5XBYnj1qzbWrTMVAJzWtrEEkKS30p8picdzUl1byWaEO2496uyIdJtMooD4qlbzfa3ZrhuvqaTKK9vHJcvtBIqWSykiYKwNdR4X8K3+pXIlt7J/soPzTyfJGPxPX8M11Gpw+FtCYPdFb64HRCcRA/Tq36Cldt2SK5NLnn2l+HtQ1lmSytZJVX7z9ET6seBW7pAttJzYD7LdT7vnmA3Ig/2c9fr0qLxN44vL2IWsDi2j7QxKEWNfTA7muZsbxrWcSYB9c10Qg92S2kz0WTVWEkRySF7+1b3wMvwnxUSYn724fmQP6151Hqkbx+Yr9B07103wXvR/wsO2ZeN4Y/kVP9KJRurFKR9T/Fbwz/wkvhe6hiH+kQ/vIiP7w5H6gV886bqlxDtO+SKVOODhlI619ZXG2RPm5R15/EV4H8SfAkmn38+safEWhYk3MajlD/fA9PX8/WvKcHa56GGqacrOX1PXrzVIDBcyLOvqyjd+dc+1qm//AFR9enFXAcjIOQe9PX5hWadtjscb7jLa3C/MqhatSzrCmSckc0wE49KWw0i68RapDpVmDvlOXk6iNB95j9P54FJRc3YbairnU/CDw9LrGuzeIbpSbe2Bhts9Gc/eb8Bx+JqH9qPUmj8LW1qDgTXig/RQT/OvXvDmkW+iafb2FpH5cMKhVHfjuffvXgn7U90fL0O2B+9LLIfwGP6120YWmkeZXnzJs8YsZsWyjtjFQ3EzRvuU/h61XtpDGnH5UlzIGHBrtscdzd8PfEDxF4UYNpGqTRQkjdbud8X/AHyePyr2Hwh+0dZ3U8UXiKw+yH7pubbLp9Sh5H4Zr54Bw2OopoYKxAYEDuDWdTDwnuio1JR2Ptqz8S6ZrED6hpOoW95CBndE+cfUdR+NR6LrY125bepBiYjmvjnS9YvtLn8+zupbeQfxxOVP6da9C8LfGXVNFAEsUM+TlmPDN/SuKeBkvhdzojiIv4j6eskP2mYAccVFpgZZ7gNjqa4Hwj8adB1e4MTXH2WeQDEdxhcn0DdD+ddXompSXGr3SsR5Z+ZfxrknSlHRo1jJPYhe0lk8Q+Ysm1AwOPWt7xCoFmmTwCP51yHiHWE0vVnfz9gGDjNaeoax/afh8yRnJKAipau1YFpc6CzlUw4Ug8VyGrQWsl5Ibhto3c84xUnw9vbq4a8S5fdtbA+lUPE3N7IOPvVdOLTaYpO6N2OLRI44wzxlu2WzzXR6C8SWrCL7u/ivKL2edbq2CLxnnmtyPxY1ldWlsCFEkig/nUSixXOt1tvL1Gxfp85Ga0Lm7R2QBgSTWJ4ruQILaVCMhiR+Vc7pOszyXyrM+QZABz2qeRt6FqSR1vidMaXmsC98SXOi6TE0McbnCj5q6TxKM6VXK6ro17qejxrawmQ/L3xWtK1tSahxC6xczWbqxJNc3dWzlXk28mq2i+I2U/6T9w8+1aer69p5tgIWXJHavTlOxxJGTax77pQV3E9q7/wxatJcpbx25MhGScdK4TRG828ScMMA16ZoOuQaVP55IZSm0juKh1GloNRXUj8Q3txosuxkKkjOM1zp1W6v8nzdopPGniGXX9VMiAJCg2getYL3UsA/d5yPQVj7STHZI1rjWZ4G8pHJJNOGo3cTo5lOeuDWGl+6SeY8Ls30qC4uNUvrlDDaTBFPYda2Tk+gro6rV/Fsotwm7YfWudfxLLISGnY/jS6l4f1a+gTyrKXPXms+PwJr8h3Nb+X/ALzUcndiu+hoaf4hkSfYJMg9jWld6GNcQyOaxYPBWpW0weQooB7Gun0hZLEMssmR70SaSKXN0OM1bwasVs6xDke1cTfW8VmypKmGzjpXs15qFkRIrOASfWuel0bR9QBMrpnJPXNZc/LqUk2tTirHwqmoIJTJszzgVtR+AdQjgR7GB5t/3WyAPzPFad1YW/hnT4NU3rLb/ao48ONyhN4Dcd+M0mv/ABAt1uXSCTfGnyoqH5FHb6n6VvTjKav0J91blaLwESQdc1ONF6+VbDcfxc8D9auRz+FfD0ix2Gl27z/89Zz5rj8+PyFcbc+LrvUFdJCcN0I4x6VivcSGbzN5Leua6o0e5DqJbHbeIfHt2cpE+CMgAHgCuIW//wBJ8668yUkHBznDdmweuPSoZ5Wdsk5NRY45PWtVFR0Rm5N6kjsHkLCUS5Od3PP1zzSq2BnrUIVA27GT65qQAnpTAfuPr+Fdt8G5G/4WHpKA8sZB/wCOE/0riB0rpvho4Xx5oob7slyI2+jKy/1qZaK447n098SPjPqfh3STF4Y0dNTniG2W7lyYo/oq8vj6gfWvAv8AheXj251ZL2fV5CY2y9j5aJE69wFA5/nX0HpNnGkJi8pSuMAY/SuL8e/CnT9ct/tukww297EdwQKAj+2P4TXPS5W9VudE4uK90wIvGnw91yNbiVbrTbmQgypANgRj1OxsrjPoahu7rw20yrpfiK1uIzwTc/uCp+p4Neez2TWzS2ssTpNEcSRuMENVOSIgY2KDnp+Vbzy6D1Jhjqi0Pabrw/pum6f9t1LxVo1rARkOswkB+mDlvwFcfrfxLi0DS5tK8Fm4825ObvXHTypGA6LEP4QPU89a4eO0XG/yogwP3sDFb/hDwfeeNdTFuoWPT7Yg3U5Hy+yj1J9Kz+r06XvFSxFSr7pt+DPFfxHsjHex+Ib+5WT5o7S7/fiUH+Ig9B+IrH+OXii48Saho32m2W1uYYH82NG3Ju3Dlc84r29dIs9E07yrOHYSApkYfM3+A9q+dfivIH8XNCpz5Fuin/ebLH9CKyp+9K45rljY5IHC4qJsA1IOgphUE4PArY5yu0bM/wA0hK/3e1O2gDgYp7x457VHISqAeppgOFSK5Hc1EnFPFAE4mIFdV4S+Jmv+ErgPaXPnw42mC4y6Y9ucj8K4/kGms20E0pJSVpFJtao9K1Lx9P4tmeSRPs8x6qrZU/Sui0v4jCw0f7DcPhlXaMmvKNDBDbvTvXYx+Gm1O3S6VuHFckqEU/dRfO92dz8NPGtw11dEvuV34BrY1/V5Hladnxk5rzzw7pVzo9/wx2ntXT6q++LDZORVezSV2Jzb0ItT8Tyx7JY5Adv61y954yubnUYZT8uxwfyNPuLIGQks2PQiqF/pUbJwcGuJOKlqavmaPZX8Tx6noavJMoZVzye9ef8AhTxXd3njSOyZ8xJKMH8a4maa+tYfLW8lCYxjNXPBFxHZeIrOYtlnmQEn61slHVoV3ofWviH5tI/CuduvENzoukRyQqjYCjDCuh1ZhLooYHOVrmNT0a81TQ1W1i3thcDOM81xU9joqH//2Q==" alt="Elnur Jabiyev" style="width:100%;height:100%;object-fit:cover;object-position:center top;"></div>
+            <div class="photo-affil" style="margin-top:4px;"><span class="affil-dot"></span>Auburn University &nbsp;·&nbsp; Graduating Aug 2026</div>
+        </div>
+    </div>
+</section>
+
+<div class="page-body">
+<main>
+
+<!-- PUBLICATIONS -->
+<div class="section" id="publications">
+    <div class="section-tag">Peer-Reviewed Work</div>
+    <div class="section-heading">Publications</div>
+
+    <div class="pub-card">
+        <div class="pub-year">2025</div>
+        <div class="pub-title"><a href="https://www.sciencedirect.com/science/article/pii/S037673882500362X" target="_blank">Greener TEAMs: Tethered Electrolyte Active-Layer Membranes Produced by Surface-Initiated Free Radical Polymerization</a></div>
+        <div class="pub-meta"><strong>Jabiyev, E.</strong>, Pour, M. H. M., &amp; Porter, C. J.</div>
+        <div class="pub-journal">Journal of Membrane Science, 124049</div>
+        <a href="https://www.sciencedirect.com/science/article/pii/S037673882500362X" target="_blank" class="pub-link">Read Paper <svg xmlns="http://www.w3.org/2000/svg" width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg></a>
+    </div>
+
+    <div class="pub-card">
+        <div class="pub-year">2024</div>
+        <div class="pub-title"><a href="https://www.sciencedirect.com/science/article/abs/pii/B9780443134395000089" target="_blank">The Water–Environment Nexus</a></div>
+        <div class="pub-meta">Porter, C. J., Beckingham, L. E., <strong>Jabiyev, E.</strong>, Shi, Z., &amp; Pour, M. H. M.</div>
+        <div class="pub-journal">The Renewable Energy–Water–Environment Nexus (pp. 205–255). Elsevier.</div>
+        <a href="https://www.sciencedirect.com/science/article/abs/pii/B9780443134395000089" target="_blank" class="pub-link">Read Chapter <svg xmlns="http://www.w3.org/2000/svg" width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg></a>
+    </div>
+
+    <div class="in-prep-note">
+        <div class="prep-pill">In Preparation</div>
+        <div class="prep-desc">6 manuscripts targeting <em>Journal of Membrane Science</em> — including Li/Mg selectivity (120×), polycation bottlebrush PVBMAC, and polyanion PSVBS systems.</div>
+    </div>
+</div>
+
+<!-- RESEARCH DEEP-DIVE -->
+<div class="section" id="research">
+    <div class="section-tag">Manuscripts in Preparation</div>
+    <div class="section-heading">Research Deep-Dive</div>
+    <p style="font-size:.9em;color:var(--text-muted);margin-bottom:26px;">Click any paper to expand the full research summary.</p>
+
+    <!-- PAPER 1: LITHIUM -->
+    <div class="paper-strip paper-lithium">
+        <div class="paper-strip-header" onclick="togglePaper(this)">
+            <div class="ps-left">
+                <div class="ps-num">Manuscript 01 &nbsp;·&nbsp; Target: Journal of Membrane Science</div>
+                <div class="ps-title">Charge Type and Crown Ether Incorporation in Novel Brush Active Thin Film Composite Nanofiltration Membranes for Selective Lithium/Magnesium Separation from Aqueous Brines</div>
+                <div class="ps-tags">
+                    <span class="ps-tag">Lithium Recovery</span><span class="ps-tag">Crown Ethers</span><span class="ps-tag">Donnan Exclusion</span><span class="ps-tag">120× Li/Mg</span><span class="ps-tag">DOE-Funded</span>
+                </div>
+            </div>
+            <div class="ps-chevron">▾</div>
+        </div>
+        <div class="paper-strip-body">
+            <div class="paper-stat-row">
+                <div class="paper-stat"><span class="ps-val" style="color:#3a9bdc">120×</span><span class="ps-lbl">Peak Li/Mg Selectivity</span></div>
+                <div class="paper-stat"><span class="ps-val" style="color:#3a9bdc">15×</span><span class="ps-lbl">Selectivity @ 2 mM 1:1</span></div>
+                <div class="paper-stat"><span class="ps-val" style="color:#3a9bdc">1st</span><span class="ps-lbl">Covalent Crown Ether BAM</span></div>
+                <div class="paper-stat"><span class="ps-val" style="color:#3a9bdc">20 kDa</span><span class="ps-lbl">Optimal PMACC MW</span></div>
+            </div>
+            <div class="paper-body-grid">
+                <div class="pb-block">
+                    <h4>Key Finding</h4>
+                    <p>Positively charged PMACC brush active nanofiltration membranes achieve up to 120-fold Li/Mg selectivity at high magnesium feed ratios (75–95% Mg²⁺) via Donnan exclusion and differential dehydration energy — the highest reported for a brush active thin film composite membrane platform.</p>
+                </div>
+                <div class="pb-block">
+                    <h4>Innovation</h4>
+                    <p>First-ever covalently tethered crown ether brush membrane (BAM) via post-polymerization amide coupling of 4′-Aminobenzo-15-crown-5 onto PMAA chains, introducing size-selective Li⁺ coordination directly into the active layer.</p>
+                </div>
+                <div class="pb-block">
+                    <h4>Membrane Systems Compared</h4>
+                    <ul>
+                        <li>Positively charged PMACC (SI-ATRP)</li>
+                        <li>Negatively charged PSVBS (SI-ATRP)</li>
+                        <li>Zwitterionic PDMAPS brushes</li>
+                        <li>Crown ether-incorporated PMAA brush active NF membranes</li>
+                    </ul>
+                </div>
+                <div class="pb-block">
+                    <h4>Significance</h4>
+                    <p>Addresses the critical Li/Mg bottleneck in brine processing for EV battery supply chains. DOE-funded (Award DE-SC0026294). Applicable to both high-Mg²⁺ pretreatment and post-pretreatment lithium production stages.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- PAPER 2: POLYCATION BOTTLEBRUSH -->
+    <div class="paper-strip paper-polycation">
+        <div class="paper-strip-header" onclick="togglePaper(this)">
+            <div class="ps-left">
+                <div class="ps-num">Manuscript 02 &nbsp;·&nbsp; Target: Journal of Membrane Science</div>
+                <div class="ps-title">Polycation Bottlebrush Brush Active Thin Film Composite Nanofiltration Membranes: Enhanced Surface Charge Density and Ion Selectivity at High Salt Concentrations</div>
+                <div class="ps-tags">
+                    <span class="ps-tag">Bottlebrush Architecture</span><span class="ps-tag">PVBMAC</span><span class="ps-tag">4× Charge Density</span><span class="ps-tag">99% CaCl₂ Rejection</span><span class="ps-tag">18× Na/Ca</span>
+                </div>
+            </div>
+            <div class="ps-chevron">▾</div>
+        </div>
+        <div class="paper-strip-body">
+            <div class="paper-stat-row">
+                <div class="paper-stat"><span class="ps-val" style="color:#9b6adc">4×</span><span class="ps-lbl">QA Density by XPS</span></div>
+                <div class="paper-stat"><span class="ps-val" style="color:#9b6adc">99%</span><span class="ps-lbl">CaCl₂ Rejection @ 2 mM</span></div>
+                <div class="paper-stat"><span class="ps-val" style="color:#9b6adc">18×</span><span class="ps-lbl">Na/Ca Selectivity @ 20 mM</span></div>
+                <div class="paper-stat"><span class="ps-val" style="color:#9b6adc">~2 nm</span><span class="ps-lbl">Pore Size (MWCO)</span></div>
+            </div>
+            <div class="paper-body-grid">
+                <div class="pb-block">
+                    <h4>Key Finding</h4>
+                    <p>PVBMAC bottlebrush brush active nanofiltration membranes maintain ~80% CaCl₂ rejection at 200 mM — compared to near-zero for single-brush membranes — overcoming the charge-screening limitation at high ionic strength.</p>
+                </div>
+                <div class="pb-block">
+                    <h4>Innovation</h4>
+                    <p>First bottlebrush architecture in brush active thin film composite membranes: 50 kDa PHEMA backbone grafted by SI-ATRP, then BiBB-esterified to create dense secondary initiation sites for PVBMAC side-chain growth. XPS confirms uniform 4× charge enhancement.</p>
+                </div>
+                <div class="pb-block">
+                    <h4>Architecture Design</h4>
+                    <ul>
+                        <li>50 kDa PHEMA backbone via SI-ATRP</li>
+                        <li>BiBB esterification of PHEMA hydroxyl groups</li>
+                        <li>PVBMAC side-chains grafted by SI-ATRP</li>
+                        <li>PMACC vs PVBMAC comparison (swelling resolved)</li>
+                    </ul>
+                </div>
+                <div class="pb-block">
+                    <h4>Impact</h4>
+                    <p>Extends brush active nanofiltration membrane performance from dilute (2 mM) to industrially relevant (200 mM) salt concentrations. Opens path to brackish water desalination and selective lithium recovery at high salinity.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- PAPER 3: POLYANION -->
+    <div class="paper-strip paper-polyanion">
+        <div class="paper-strip-header" onclick="togglePaper(this)">
+            <div class="ps-left">
+                <div class="ps-num">Manuscript 03 &nbsp;·&nbsp; Target: Journal of Membrane Science</div>
+                <div class="ps-title">pH-Controlled SI-ATRP of Polyanion Brush Active Thin Film Composite Nanofiltration Membranes: Single-Brush and Bottlebrush Architectures for Enhanced Monovalent Anion Selectivity</div>
+                <div class="ps-tags">
+                    <span class="ps-tag">PSVBS</span><span class="ps-tag">pH-Controlled SI-ATRP</span><span class="ps-tag">25× Cl/SO₄</span><span class="ps-tag">3.4× Sulfonate Density</span><span class="ps-tag">200 mM Performance</span>
+                </div>
+            </div>
+            <div class="ps-chevron">▾</div>
+        </div>
+        <div class="paper-strip-body">
+            <div class="paper-stat-row">
+                <div class="paper-stat"><span class="ps-val" style="color:#3adc9b">25×</span><span class="ps-lbl">Cl/SO₄ Selectivity @ 2 mM</span></div>
+                <div class="paper-stat"><span class="ps-val" style="color:#3adc9b">7×</span><span class="ps-lbl">Selectivity @ 200 mM (BB)</span></div>
+                <div class="paper-stat"><span class="ps-val" style="color:#3adc9b">3.4×</span><span class="ps-lbl">Sulfonate Groups by XPS</span></div>
+                <div class="paper-stat"><span class="ps-val" style="color:#3adc9b">1st</span><span class="ps-lbl">Direct SI-ATRP of PSVBS</span></div>
+            </div>
+            <div class="paper-body-grid">
+                <div class="pb-block">
+                    <h4>Key Finding</h4>
+                    <p>First direct PSVBS brush grafting via pH-controlled SI-ATRP (pH 9.5 + HCl), eliminating toxic precursor monomers and post-polymerization deprotection. 25-fold Cl⁻/SO₄²⁻ selectivity — among the highest reported for polyanion brush active nanofiltration membranes.</p>
+                </div>
+                <div class="pb-block">
+                    <h4>pH Control Mechanism</h4>
+                    <p>HCl addition to pH 9.5 reduces electrostatic repulsion between incoming sulfonate monomers and the growing brush, while maintaining halide coordination to the Cu catalyst — preventing oxidative termination in aqueous ATRP.</p>
+                </div>
+                <div class="pb-block">
+                    <h4>Bottlebrush Achievement</h4>
+                    <ul>
+                        <li>~90% Na₂SO₄ and ~80% NaCl rejection at 200 mM</li>
+                        <li>7-fold Cl/SO₄ selectivity at 200 mM — first report</li>
+                        <li>3.4× sulfonate density confirmed by XPS</li>
+                        <li>Uniform surface coverage across all strips</li>
+                    </ul>
+                </div>
+                <div class="pb-block">
+                    <h4>Applications</h4>
+                    <p>Zero liquid discharge systems, chloride/sulfate separation in industrial wastewater, and selective anion recovery. Establishes pH-controlled SI-ATRP as a generalizable method for polyanion brush active thin film composite nanofiltration membranes.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- PRESENTATIONS -->
+<div class="section" id="presentations">
+    <div class="section-tag">Scholarly Activity</div>
+    <div class="section-heading">Conference Presentations</div>
+    <p style="font-size:.87em;color:var(--text-muted);margin-bottom:26px;">4 international conferences &nbsp;·&nbsp; 13 conference presentations</p>
+
+    <div class="pres-item">
+        <div class="pres-yr">2025</div><div class="pres-dot"></div>
+        <div>
+            <div class="pres-ttl">Fabrication of Li/Mg Selective Novel Brush Active Thin Film Composite Nanofiltration Membranes for Lithium Production from Brine Water Sources<span class="pres-badge oral">Oral</span></div>
+            <div class="pres-conf">AIChE Annual Meeting 2025 &nbsp;·&nbsp; Jabiyev, E., Pour, M. H. M., Howe, G., &amp; Porter, C.</div>
+        </div>
+    </div>
+    <div class="pres-item">
+        <div class="pres-yr">2025</div><div class="pres-dot"></div>
+        <div>
+            <div class="pres-ttl">Bottlebrush Polyelectrolyte Brush Active Thin Film Composite Nanofiltration Membranes for Enhanced Ion Selectivity<span class="pres-badge poster">Poster</span></div>
+            <div class="pres-conf">AIChE Annual Meeting 2025 &nbsp;·&nbsp; Jabiyev, E., Pour, M. H. M., Jung, M., McPherson, A., Earhart, O., &amp; Porter, C.</div>
+        </div>
+    </div>
+    <div class="pres-item">
+        <div class="pres-yr">2024</div><div class="pres-dot"></div>
+        <div>
+            <div class="pres-ttl">Greener Brush Active Nanofiltration Membranes Produced by Surface-Initiated Free Radical Polymerization<span class="pres-badge oral">Oral</span></div>
+            <div class="pres-conf">AIChE Annual Meeting 2024 &nbsp;·&nbsp; Jabiyev, E., Pour, M. H. M., &amp; Porter, C.</div>
+        </div>
+    </div>
+    <div class="pres-item">
+        <div class="pres-yr">2024</div><div class="pres-dot"></div>
+        <div>
+            <div class="pres-ttl">Ion-Selective Nanofiltration Membranes via Surface-Initiated Polymerization for Critical Mineral Recovery<span class="pres-badge oral">Oral</span></div>
+            <div class="pres-conf">North American Membrane Society (NAMS) Annual Meeting 2024</div>
+        </div>
+    </div>
+    <div class="pres-item">
+        <div class="pres-yr">2023</div><div class="pres-dot"></div>
+        <div>
+            <div class="pres-ttl">Novel Brush Active Thin Film Composite Nanofiltration Membranes: Greener Synthesis and Enhanced Ion Selectivity<span class="pres-badge poster">Poster</span></div>
+            <div class="pres-conf">AIChE Annual Meeting 2023 &nbsp;·&nbsp; Jabiyev, E. &amp; Porter, C.</div>
+        </div>
+    </div>
+</div>
+
+<!-- EXPERIENCE & EDUCATION -->
+<div class="section" id="experience">
+    <div class="section-tag">Background</div>
+    <div class="section-heading">Experience &amp; Education</div>
+
+    <!-- Experience -->
+    <div class="exp-item">
+        <div class="exp-left">
+            <div class="exp-role">Graduate Research Assistant</div>
+            <div class="exp-org">Auburn University &nbsp;·&nbsp; Auburn, AL</div>
+            <div class="exp-date">Aug 2021 – Present</div>
+        </div>
+        <div class="exp-right">
+            <ul class="exp-bullets">
+                <li>Built Dr. Porter's wet polymer synthesis laboratory from the ground up as her first PhD student, establishing safety protocols and polymerization methodologies for SI-ATRP, SI-FRP, RAFT, and related surface-initiated techniques that became the operational backbone of all subsequent membrane work in the lab.</li>
+                <li>Advanced thin-film composite nanofiltration and reverse osmosis membranes by integrating uniform, defect-free, covalently bonded active layers via bottom-up surface-initiated polymer brush grafting for critical mineral recovery, water treatment, and desalination.</li>
+                <li>Developed lithium-selective nanofiltration membranes achieving 120-fold lithium/magnesium selectivity — the highest reported for polymer-based, pressure-driven systems — directly addressing a critical bottleneck in domestic lithium supply for EV battery manufacturing.</li>
+                <li>Improved membrane salt rejection and ion-selectivity by 100-fold across a wide salinity range by increasing surface functional group density through bottlebrush and hyperbranched polymer brush architectures.</li>
+                <li>Contributed to $1.4M in NSF and DOE funding by generating preliminary research results that anchored two successful grant proposals.</li>
+                <li>Mentored 4 PhD and 6 undergraduate researchers in polymer synthesis and membrane fabrication.</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="exp-item">
+        <div class="exp-left">
+            <div class="exp-role">Process Engineering Intern</div>
+            <div class="exp-org">Petrochemical &amp; Refinery Facilities<br><span style="font-size:.85em;opacity:.8">(Velocis Solutions · Petkim SOCAR · Azerkimya IB · Baku Oil Refinery)</span></div>
+            <div class="exp-date">Jun 2018 – Aug 2021</div>
+        </div>
+        <div class="exp-right">
+            <ul class="exp-bullets">
+                <li>Gained 2+ years of cumulative hands-on experience across petrochemical, polymer manufacturing, and refining, developing practical understanding of industrial-scale chemical processes, unit operations, and separation systems.</li>
+                <li>Developed working knowledge of industrial safety protocols, unit operations, and control procedures, providing direct context for scaling research and development innovations from bench to commercial application.</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- Education -->
+    <div style="margin-top:36px;">
+        <div class="section-tag" style="margin-bottom:18px;">Education</div>
+        <div class="edu-item">
+            <div class="edu-deg">Doctor of Philosophy (Ph.D.), Chemical Engineering</div>
+            <div class="edu-school">Auburn University &nbsp;·&nbsp; Auburn, AL</div>
+            <div class="edu-date">Aug 2021 – Aug 2026</div>
+        </div>
+        <div class="edu-item">
+            <div class="edu-deg">Master of Science (M.S.), Chemical Engineering</div>
+            <div class="edu-school">Auburn University &nbsp;·&nbsp; Auburn, AL</div>
+            <div class="edu-date">Aug 2021 – May 2023</div>
+        </div>
+        <div class="edu-item">
+            <div class="edu-deg">Bachelor of Science (B.S.), Chemical Engineering</div>
+            <div class="edu-school">Baku Higher Oil School &nbsp;·&nbsp; Baku, Azerbaijan</div>
+            <div class="edu-date">Sep 2016 – Jul 2021</div>
+        </div>
+    </div>
+</div>
+
+<!-- SKILLS -->
+<div class="section" id="skills">
+    <div class="section-tag">Expertise</div>
+    <div class="section-heading">Technical Skills</div>
+    <div class="skill-group">
+        <div class="skill-group-title">Polymer Synthesis &amp; Membrane Fabrication</div>
+        <div class="skill-row"><span class="skill-name">SI-ATRP / SI-FRP / RAFT</span><div class="skill-bar-bg"><div class="skill-bar" style="width:97%"></div></div></div>
+        <div class="skill-row"><span class="skill-name">Surface Brush Grafting</span><div class="skill-bar-bg"><div class="skill-bar" style="width:96%"></div></div></div>
+        <div class="skill-row"><span class="skill-name">Thin-Film Composite Membranes</span><div class="skill-bar-bg"><div class="skill-bar" style="width:95%"></div></div></div>
+        <div class="skill-row"><span class="skill-name">Nanofiltration &amp; Reverse Osmosis</span><div class="skill-bar-bg"><div class="skill-bar" style="width:95%"></div></div></div>
+        <div class="skill-row"><span class="skill-name">Ultrafiltration &amp; Ion-Exchange Films</span><div class="skill-bar-bg"><div class="skill-bar" style="width:90%"></div></div></div>
+    </div>
+    <div class="skill-group">
+        <div class="skill-group-title">Characterization Techniques</div>
+        <div class="skill-row"><span class="skill-name">NMR / FTIR / XPS</span><div class="skill-bar-bg"><div class="skill-bar" style="width:93%"></div></div></div>
+        <div class="skill-row"><span class="skill-name">SEM / TEM / GPC</span><div class="skill-bar-bg"><div class="skill-bar" style="width:90%"></div></div></div>
+        <div class="skill-row"><span class="skill-name">IC / TOC / ICP-MS</span><div class="skill-bar-bg"><div class="skill-bar" style="width:92%"></div></div></div>
+        <div class="skill-row"><span class="skill-name">DSC / TGA / DMA / XRD</span><div class="skill-bar-bg"><div class="skill-bar" style="width:85%"></div></div></div>
+    </div>
+    <div class="skill-group">
+        <div class="skill-group-title">Computational &amp; Process Tools</div>
+        <div class="skill-row"><span class="skill-name">Aspen HYSYS / Aspen Plus</span><div class="skill-bar-bg"><div class="skill-bar gold" style="width:85%"></div></div></div>
+        <div class="skill-row"><span class="skill-name">Python / MATLAB</span><div class="skill-bar-bg"><div class="skill-bar gold" style="width:80%"></div></div></div>
+        <div class="skill-row"><span class="skill-name">Data Science &amp; Machine Learning</span><div class="skill-bar-bg"><div class="skill-bar gold" style="width:72%"></div></div></div>
+        <div class="skill-row"><span class="skill-name">Microsoft Office</span><div class="skill-bar-bg"><div class="skill-bar gold" style="width:90%"></div></div></div>
+    </div>
+    <div class="skill-group">
+        <div class="skill-group-title">Languages</div>
+        <div class="skill-row"><span class="skill-name">English</span><div class="skill-bar-bg"><div class="skill-bar" style="width:99%"></div></div></div>
+        <div class="skill-row"><span class="skill-name">Turkish</span><div class="skill-bar-bg"><div class="skill-bar" style="width:99%"></div></div></div>
+        <div class="skill-row"><span class="skill-name">Russian</span><div class="skill-bar-bg"><div class="skill-bar" style="width:60%"></div></div></div>
+    </div>
+</div>
+
+</main>
+
+<!-- SIDEBAR -->
+<aside>
+    <div id="contact" class="sidebar-card">
+        <div class="sc-head"><h3>Contact</h3></div>
+        <div class="sc-body">
+            <div class="c-row">
+                <div class="c-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></div>
+                <div><div class="c-lbl">Email</div><div class="c-val"><a href="mailto:ezj0033@auburn.edu">ezj0033@auburn.edu</a></div></div>
+            </div>
+            <div class="c-row">
+                <div class="c-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 14a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.59 3h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 10.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 17.92z"/></svg></div>
+                <div><div class="c-lbl">Phone</div><div class="c-val"><a href="tel:+13347808213">+1 (334) 780-8213</a></div></div>
+            </div>
+            <div class="c-row">
+                <div class="c-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg></div>
+                <div><div class="c-lbl">LinkedIn</div><div class="c-val"><a href="https://www.linkedin.com/in/elnur-jabiyev-u1999/" target="_blank">elnur-jabiyev-u1999</a></div></div>
+            </div>
+            <div class="c-row">
+                <div class="c-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg></div>
+                <div><div class="c-lbl">Google Scholar</div><div class="c-val"><a href="https://scholar.google.com/citations?user=qDRpqsYAAAAJ&hl=en" target="_blank">View Profile</a></div></div>
+            </div>
+            <div class="c-row">
+                <div class="c-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg></div>
+                <div><div class="c-lbl">Resume</div><div class="c-val"><a href="Elnur_Jabiyev_Resume.pdf" download>Download PDF</a></div></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="sidebar-card">
+        <div class="sc-head"><h3>Research Areas</h3></div>
+        <div class="tag-cloud">
+            <span class="rtag hl">Lithium Recovery</span><span class="rtag hl">Ion Selectivity</span><span class="rtag hl">Brush Active NF Membranes</span>
+            <span class="rtag">SI-ATRP</span><span class="rtag">SI-FRP</span><span class="rtag">Bottlebrush Polymers</span>
+            <span class="rtag">Crown Ethers</span><span class="rtag">Donnan Exclusion</span><span class="rtag">Nanofiltration</span>
+            <span class="rtag">Reverse Osmosis</span><span class="rtag">Water Treatment</span><span class="rtag">Desalination</span>
+            <span class="rtag">Antifouling</span><span class="rtag">Resource Recovery</span><span class="rtag">Brush Active RO Membranes</span>
+        </div>
+    </div>
+
+    <div class="sidebar-card">
+        <div class="sc-head"><h3>Funding</h3></div>
+        <div class="sc-body">
+            <div class="funding-item">
+                <span class="f-badge doe">DOE</span>
+                <div class="f-desc">Early Career Research Program, Award DE-SC0026294 — Lithium recovery from geothermal brines</div>
+            </div>
+            <div class="funding-item">
+                <span class="f-badge nsf">NSF</span>
+                <div class="f-desc">Membrane technology for critical mineral separations and water treatment</div>
+            </div>
+            <div style="margin-top:10px;padding-top:10px;border-top:1px solid var(--border);font-size:.82em;color:var(--text-muted);">
+                Contributed preliminary data toward <strong style="color:var(--navy)">$1.4M</strong> in awarded NSF/DOE funding
+            </div>
+        </div>
+    </div>
+
+    <div class="sidebar-card">
+        <div class="sc-head"><h3>Profiles</h3></div>
+        <div class="sc-body" style="display:flex;flex-direction:column;gap:8px;">
+            <a href="https://www.researchgate.net/profile/Elnur-Jabiyev" target="_blank" style="display:block;text-align:center;background:var(--warm-gray);border:1px solid var(--border);border-radius:5px;padding:9px;color:var(--navy);text-decoration:none;font-size:.83em;font-weight:500;transition:background .2s;" onmouseover="this.style.background='#e8e3dc'" onmouseout="this.style.background='var(--warm-gray)'">ResearchGate →</a>
+            <a href="https://www.facebook.com/elnur.cebiyev.777" target="_blank" style="display:block;text-align:center;background:var(--warm-gray);border:1px solid var(--border);border-radius:5px;padding:9px;color:var(--navy);text-decoration:none;font-size:.83em;font-weight:500;transition:background .2s;" onmouseover="this.style.background='#e8e3dc'" onmouseout="this.style.background='var(--warm-gray)'">Facebook →</a>
+        </div>
+    </div>
+    <div class="sidebar-card">
+        <div class="sc-head"><h3>Work Authorization</h3></div>
+        <div class="sc-body" style="font-size:.84em;color:var(--text-muted);line-height:1.55;">
+            Authorized to work in the U.S. for any employer.<br>
+            <strong style="color:var(--navy)">No sponsorship required</strong>, now or in the future.
+        </div>
+    </div>
+</aside>
+</div>
+
+<footer>
+    <p>&copy; 2025 Elnur Jabiyev &nbsp;·&nbsp; Department of Chemical Engineering, Auburn University &nbsp;·&nbsp; <a href="mailto:ezj0033@auburn.edu">ezj0033@auburn.edu</a></p>
+</footer>
+
+<script>
+function togglePaper(header) {
+    const body = header.nextElementSibling;
+    const chevron = header.querySelector('.ps-chevron');
+    const isOpen = body.classList.contains('open');
+    document.querySelectorAll('.paper-strip-body').forEach(b => b.classList.remove('open'));
+    document.querySelectorAll('.ps-chevron').forEach(c => c.classList.remove('open'));
+    if (!isOpen) { body.classList.add('open'); chevron.classList.add('open'); }
+}
+</script>
+</body>
+</html>
